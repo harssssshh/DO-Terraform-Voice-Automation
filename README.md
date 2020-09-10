@@ -15,7 +15,7 @@
 
 ### Token Created
 
-** Copy Token (It won't be displayed again) ** 
+**Copy Token (It won't be displayed again)** 
 
 ![alt text](/Screenshots/token.png?raw=true "do-token-generate")
 
