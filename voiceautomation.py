@@ -29,10 +29,10 @@ def respond_audio(audio):
 def isbase64(token):
     try:
         base64.b64encode(base64.b64decode(token)) == token
-        print("Token seems to be fine")
+        respond_audio(audio="Token seems to be fine")
         setenv(token)
     except Exception:
-        print("Incorrect Token ! Please enter correct token")
+        respond_audio(audio="Incorrect Token ! Please enter correct token")
         token_input()
         
 
