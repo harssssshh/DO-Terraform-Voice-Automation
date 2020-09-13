@@ -4,6 +4,7 @@ import os
 import subprocess
 import shutil
 import time
+import base64
 
 r = sr.Recognizer()
 
@@ -25,8 +26,21 @@ def respond_audio(audio):
     subprocess.call('play cluster.mp3', shell=True)
 
 
-def setenv():
+def isbase64(token):
+    try:
+        base64.b64encode(base64.b64decode(token)) == token
+        print("Token seems to be fine")
+        setenv(token)
+    except Exception:
+        print("Incorrect Token ! Please enter correct token")
+        token_input()
+        
+
+def token_input():
     token = input("Enter Digitalocean Personal Access Token: ")
+    isbase64(token)
+
+def setenv(token):
     do_token = "export TF_VAR_DO_TOKEN=" + token + '\n'
     tfvartoken = 'do_pat =  "{}" \n'.format(token)
     os.chdir("terraconfig")
@@ -50,7 +64,7 @@ def logic():
         respond_audio(audio="Creating Environment, Hold on for a while")
         time.sleep(2)
         respond_audio(audio="First Copy Your Digitalocean Personal Access Token Please") 
-        setenv()
+        token_input()
     else:
         terraconfig(answer)
 
